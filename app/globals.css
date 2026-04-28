@@ -339,25 +339,50 @@
   }
   .region-grid-dark {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 32px;
+    margin-top: 40px;
   }
+
+  /* Mobile city-dark: vertikaler stack mit klarer hierarchie
+   * row 1: nummer (i.) + pfeil
+   * row 2: stadtname (groß)
+   * row 3: meta (klein, gedimmt)
+   * Grid wird komplett neu definiert — überschreibt desktop 4-col explizit
+   */
   .city-dark {
-    grid-template-columns: 36px 1fr 24px;
-    gap: 16px;
-    padding: 22px 0;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
+    gap: 4px 12px;
+    padding: 24px 0;
   }
-  .city-dark .meta {
-    grid-column: 2 / 3;
-    grid-row: 2;
-    margin-top: 4px;
-    white-space: normal;
-  }
-  .city-dark .name {
-    font-size: 26px;
+  .city-dark .nn {
+    grid-column: 1 / 2;
+    grid-row: 1;
+    font-size: 14px;
+    align-self: center;
   }
   .city-dark .arrow-link {
-    grid-row: 1 / 3;
+    grid-column: 2 / 3;
+    grid-row: 1;
     align-self: center;
+    transform: none;
+  }
+  .city-dark .name {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    font-size: 28px;
+    margin-top: 4px;
+  }
+  .city-dark .meta {
+    grid-column: 1 / 3;
+    grid-row: 3;
+    margin-top: 2px;
+    white-space: normal;
+    font-size: 13px;
+  }
+  /* Hover-shift weniger aggressiv auf mobile */
+  .city-dark:hover {
+    padding-left: 4px;
   }
 }
 @media (max-width: 640px) {
@@ -366,8 +391,9 @@
     padding-bottom: 64px;
   }
   .city-dark .name {
-    font-size: 22px;
+    font-size: 24px;
   }
+}
 }
 
 /* ============================================================ */
