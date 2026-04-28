@@ -664,3 +664,36 @@ img, svg, video, canvas {
     font-size: 40px;
   }
 }
+
+/* ============================================================ */
+/* Mobile section-head: bessere Atmung zwischen H2 und Kicker   */
+/* + engerer Zeilenabstand INNERHALB der H2 (Cormorant)         */
+/* ============================================================ */
+
+/* Tablet & Mobile (<1180px): section-head stackt 1-spaltig (siehe design.css).
+ * Desktop bleibt unangetastet. */
+@media (max-width: 1180px) {
+  .section-head {
+    gap: 28px; /* mehr Luft zwischen H2-Block und Kicker-Block (default war 16px) */
+  }
+  .section-head h2 {
+    line-height: 1.0; /* enger als design.css 1.05 — bei mobile mit
+                       * Cormorant 30-44px wirkt 1.05 zu locker.
+                       * 1.0 zieht die zwei Zeilen visuell zusammen. */
+    margin-top: 0; /* design.css hat margin: 16px 0 0 — bei 1-col stack
+                    * ueberfluessig, grid-gap erledigt das. */
+  }
+  .section-head p.kicker {
+    margin-top: 4px; /* mini-extra Luft zwischen letzter H2-Zeile und kicker */
+  }
+}
+
+/* Sehr kleine Screens: noch etwas mehr Atmung zwischen den Bloecken */
+@media (max-width: 480px) {
+  .section-head {
+    gap: 24px;
+  }
+  .section-head h2 {
+    line-height: 1.0;
+  }
+}
