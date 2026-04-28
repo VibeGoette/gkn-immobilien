@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetchList } from "@/sanity/lib/live";
 import { formatAddressShort, formatStreetline, type ReferenceAddress } from "@/lib/address";
 
 const QUERY = `*[_type == "referencePage"] | order(order asc, acquisitionDate desc){
@@ -26,8 +26,7 @@ type RefItem = {
 };
 
 export default async function PortfolioPage() {
-  const { data } = await sanityFetch({ query: QUERY });
-  const refs: RefItem[] = data ?? [];
+  const refs = await sanityFetchList<RefItem>({ query: QUERY });
 
   return (
     <main className="mx-auto max-w-6xl px-6 py-24">

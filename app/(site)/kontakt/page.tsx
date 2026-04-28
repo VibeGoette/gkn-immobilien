@@ -9,8 +9,12 @@ export const metadata = {
   title: "Kontakt — Immobilienankauf besprechen",
 };
 
+type Data = {
+  contact?: { phone?: string; email?: string; address?: string };
+};
+
 export default async function ContactPage() {
-  const { data } = await sanityFetch({ query: QUERY });
+  const { data } = await sanityFetch<Data>({ query: QUERY });
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-24">

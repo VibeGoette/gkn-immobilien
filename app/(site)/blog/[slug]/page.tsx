@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, sanityFetchList } from "@/sanity/lib/live";
 
 const QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
   _id, title, excerpt, publishedAt, image, body, seo,
@@ -7,10 +7,9 @@ const QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
 }`;
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  return sanityFetchList<{ slug: string }>({
     query: `*[_type == "blogPost" && defined(slug.current)]{ "slug": slug.current }`,
   });
-  return data ?? [];
 }
 
 export default async function BlogPostPage({
@@ -19,7 +18,10 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { data } = await sanityFetch({ query: QUERY, params: { slug } });
+  const { data } = await sanityFetch<{ title: string }>({
+    query: QUERY,
+    params: { slug },
+  });
   if (!data) notFound();
 
   return (

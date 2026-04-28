@@ -32,6 +32,27 @@ export async function sanityFetch<T = unknown>({
 }
 
 /**
+ * sanityFetchList: typed helper für Listen-Queries (immer Array zurück).
+ * Speziell für generateStaticParams() und Listen-Renderer.
+ */
+export async function sanityFetchList<T>({
+  query,
+  params = {},
+}: {
+  query: string;
+  params?: Record<string, unknown>;
+}): Promise<T[]> {
+  if (!isSanityConfigured) return [];
+  try {
+    const data = await client.fetch<T[]>(query, params);
+    return data ?? [];
+  } catch (err) {
+    console.warn("sanityFetchList fehlgeschlagen:", err);
+    return [];
+  }
+}
+
+/**
  * SanityLive: Placeholder-Component für Live-Mode.
  * Wird in Etappe 2 mit echtem Live-Listener (next-sanity v11 API) ersetzt.
  */

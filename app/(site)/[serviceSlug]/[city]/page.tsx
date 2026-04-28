@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, sanityFetchList } from "@/sanity/lib/live";
 
 const QUERY = `*[_type == "serviceLocationPage"
   && serviceSlug.current == $serviceSlug
@@ -10,13 +10,16 @@ const QUERY = `*[_type == "serviceLocationPage"
 }`;
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  const items = await sanityFetchList<{
+    serviceSlug: string;
+    city?: string;
+  }>({
     query: `*[_type == "serviceLocationPage" && defined(serviceSlug.current)]{
       "serviceSlug": serviceSlug.current,
       "city": location->slug.current
     }`,
   });
-  return (data ?? []).filter((p: { city?: string }) => !!p.city);
+  return items.filter((p): p is { serviceSlug: string; city: string } => !!p.city);
 }
 
 export default async function ServiceLocationPage({
@@ -25,10 +28,10 @@ export default async function ServiceLocationPage({
   params: Promise<{ serviceSlug: string; city: string }>;
 }) {
   const { serviceSlug, city } = await params;
-  const { data } = await sanityFetch({
-    query: QUERY,
-    params: { serviceSlug, city },
-  });
+  const { data } = await sanityFetch<{
+    title: string;
+    hero?: { headline?: string };
+  }>({ query: QUERY, params: { serviceSlug, city } });
   if (!data) notFound();
 
   return (

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, sanityFetchList } from "@/sanity/lib/live";
 import {
   formatAddressFull,
   formatStreetline,
@@ -14,11 +14,16 @@ const QUERY = `*[_type == "referencePage" && slug.current == $slug][0]{
 }`;
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  return sanityFetchList<{ slug: string }>({
     query: `*[_type == "referencePage" && defined(slug.current)]{ "slug": slug.current }`,
   });
-  return data ?? [];
 }
+
+type ReferenceData = {
+  title: string;
+  primary: ReferenceAddress["primary"];
+  additional?: ReferenceAddress["additional"];
+};
 
 export default async function ReferenceDetailPage({
   params,
@@ -26,7 +31,7 @@ export default async function ReferenceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const { data } = await sanityFetch({ query: QUERY, params: { slug } });
+  const { data } = await sanityFetch<ReferenceData>({ query: QUERY, params: { slug } });
   if (!data) notFound();
 
   const address: ReferenceAddress = {

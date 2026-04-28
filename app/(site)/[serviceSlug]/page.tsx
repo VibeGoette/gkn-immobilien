@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, sanityFetchList } from "@/sanity/lib/live";
 
 const QUERY = `*[_type == "servicePage" && slug.current == $slug][0]{
   _id, title, serviceType, hero, sections, seo,
@@ -7,10 +7,10 @@ const QUERY = `*[_type == "servicePage" && slug.current == $slug][0]{
 }`;
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  const items = await sanityFetchList<{ serviceSlug: string }>({
     query: `*[_type == "servicePage" && defined(slug.current)]{ "serviceSlug": slug.current }`,
   });
-  return (data ?? []).map((p: { serviceSlug: string }) => ({ serviceSlug: p.serviceSlug }));
+  return items;
 }
 
 export default async function ServicePage({
@@ -19,7 +19,11 @@ export default async function ServicePage({
   params: Promise<{ serviceSlug: string }>;
 }) {
   const { serviceSlug } = await params;
-  const { data } = await sanityFetch({ query: QUERY, params: { slug: serviceSlug } });
+  const { data } = await sanityFetch<{
+    title: string;
+    serviceType: string;
+    hero?: { headline?: string };
+  }>({ query: QUERY, params: { slug: serviceSlug } });
   if (!data) notFound();
 
   return (

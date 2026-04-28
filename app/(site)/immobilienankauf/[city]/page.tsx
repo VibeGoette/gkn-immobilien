@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { sanityFetch } from "@/sanity/lib/live";
+import { sanityFetch, sanityFetchList } from "@/sanity/lib/live";
 
 const QUERY = `*[_type == "locationPage" && slug.current == $city][0]{
   _id, city, hero, marketIntro, sections, seo, geo,
@@ -7,10 +7,9 @@ const QUERY = `*[_type == "locationPage" && slug.current == $city][0]{
 }`;
 
 export async function generateStaticParams() {
-  const { data } = await sanityFetch({
+  return sanityFetchList<{ city: string }>({
     query: `*[_type == "locationPage" && defined(slug.current)]{ "city": slug.current }`,
   });
-  return data ?? [];
 }
 
 export default async function LocationPage({
@@ -19,12 +18,17 @@ export default async function LocationPage({
   params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
-  const { data } = await sanityFetch({ query: QUERY, params: { city } });
+  const { data } = await sanityFetch<{
+    city: string;
+    hero?: { headline?: string };
+  }>({ query: QUERY, params: { city } });
   if (!data) notFound();
 
   return (
     <article className="mx-auto max-w-5xl px-6 py-24">
-      <h1 className="text-4xl font-light">{data.hero?.headline ?? `Immobilienankauf ${data.city}`}</h1>
+      <h1 className="text-4xl font-light">
+        {data.hero?.headline ?? `Immobilienankauf ${data.city}`}
+      </h1>
       <p className="mt-4 text-neutral-400">/immobilienankauf/{city}/</p>
     </article>
   );
