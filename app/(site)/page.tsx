@@ -1,21 +1,47 @@
+import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
+import { Advantages } from "@/components/sections/Advantages";
+import { Ankaufsprofil } from "@/components/sections/Ankaufsprofil";
+import { Process } from "@/components/sections/Process";
+import { Region } from "@/components/sections/Region";
+import { Team } from "@/components/sections/Team";
+import { Portfolio } from "@/components/sections/Portfolio";
+import { Faq, CtaStrip } from "@/components/sections/Faq";
+
+/**
+ * Startseite — komponiert aus 10 Sections.
+ *
+ * Inhalte sind aktuell statisch (aus gkn-content-vollstaendig.md / Design-HTML).
+ * Migration zu Sanity-getrieben erfolgt in Etappe 2 — dann liest die Page
+ * via sanityFetch() das homePage Singleton + bezogene Documents.
+ *
+ * Header + Footer + UtilityBar werden vom (site)/layout.tsx bereitgestellt.
+ */
+export const metadata = {
+  title: "Immobilienankauf im Ruhrgebiet | GKN Immobiliengruppe",
+  description:
+    "GKN Immobiliengruppe kauft Mehrfamilienhäuser, Gewerbeimmobilien, Grundstücke und Portfolios im Ruhrgebiet. Diskret, schnell und bankenunabhängig — mit sofortiger Anzahlung.",
+  alternates: { canonical: "https://gkn-immobilien.de/" },
+  openGraph: {
+    title: "Immobilienankauf Ruhrgebiet — GKN Immobiliengruppe",
+    description:
+      "Mehrfamilienhäuser, Gewerbeimmobilien und Portfolios diskret und schnell verkaufen. Direkt an GKN — ohne Makler, bankenunabhängig, mit sofortiger Anzahlung.",
+  },
+};
+
 export default function HomePage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-6 px-6 text-center">
-      <h1 className="text-5xl font-light tracking-tight md:text-7xl">
-        GKN Immobiliengruppe
-      </h1>
-      <p className="max-w-2xl text-lg text-neutral-400">
-        Immobilienankauf auf die schnelle, transparente und feine Art.
-      </p>
-      <p className="mt-8 text-sm text-neutral-500">
-        Scaffold ready · Design + Inhalte werden gleich befüllt
-      </p>
-      <a
-        href="/studio"
-        className="mt-2 rounded-full border border-neutral-700 px-5 py-2 text-sm text-neutral-300 transition hover:border-neutral-400 hover:text-white"
-      >
-        Studio öffnen →
-      </a>
-    </main>
+    <>
+      <Hero />
+      <About />
+      <Advantages />
+      <Ankaufsprofil />
+      <Process />
+      <Region />
+      <Team />
+      <Portfolio />
+      <Faq />
+      <CtaStrip />
+    </>
   );
 }

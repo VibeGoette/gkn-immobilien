@@ -1,16 +1,17 @@
+/**
+ * Globale Styles für gkn-immobilien.de
+ *
+ * - Tailwind v4 als utility layer
+ * - design.css enthält das komplette Editorial-Design (Cormorant + Inter + JetBrains Mono, Blau-CI)
+ * - Schriften via next/font (siehe layout.tsx) — unten gemappt auf design.css Variablen
+ */
+
 @import "tailwindcss";
+@import "./design.css";
 
-/* Design tokens — wird beim Übernehmen des Claude-Designs erweitert */
-@theme {
-  --color-brand-bg: #0a0a0a;
-  --color-brand-fg: #fafafa;
-  --color-brand-accent: #c9a961;
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: ui-serif, Georgia, serif;
-}
-
-html, body {
-  background-color: var(--color-brand-bg);
-  color: var(--color-brand-fg);
-  font-family: var(--font-sans);
+/* next/font Variablen auf design.css Tokens mappen — überschreibt die :root defaults */
+:root {
+  --serif: var(--font-cormorant), "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --grotesk: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  --mono: var(--font-jetbrains-mono), "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }

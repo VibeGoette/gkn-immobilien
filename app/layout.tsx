@@ -1,17 +1,46 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
+import { isSanityConfigured } from "@/sanity/env";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
-    default: "GKN Immobiliengruppe — Immobilienankauf Ruhrgebiet",
+    default: "Immobilienankauf im Ruhrgebiet | GKN Immobiliengruppe",
     template: "%s | GKN Immobiliengruppe",
   },
   description:
-    "Immobilienankauf auf die schnelle, transparente und feine Art. Mehrfamilienhäuser, Gewerbeimmobilien, Portfolios und Grundstücke im Ruhrgebiet bis 30 Mio. €.",
+    "GKN Immobiliengruppe kauft Mehrfamilienhäuser, Gewerbeimmobilien, Grundstücke und Portfolios im Ruhrgebiet. Diskret, schnell und bankenunabhängig — mit sofortiger Anzahlung.",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "https://gkn-immobilien.de",
   ),
+  openGraph: {
+    type: "website",
+    locale: "de_DE",
+    siteName: "GKN Immobiliengruppe",
+  },
 };
 
 export default function RootLayout({
@@ -20,10 +49,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de">
-      <body className="antialiased">
+    <html
+      lang="de"
+      className={`${cormorant.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+    >
+      <body>
         {children}
-        <SanityLive />
+        {isSanityConfigured && <SanityLive />}
       </body>
     </html>
   );
