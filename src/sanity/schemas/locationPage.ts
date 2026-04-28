@@ -39,8 +39,19 @@ export const locationPage = defineType({
       title: "Verlinkte Service-Seiten",
       type: "array",
       of: [{ type: "reference", to: [{ type: "servicePage" }, { type: "serviceLocationPage" }] }],
+      validation: (r) => r.min(1).warning("Min. 1 verlinkte Service-Seite — Cluster-Strategie."),
     }),
-    defineField({ name: "seo", title: "SEO", type: "seoFields" }),
+    defineField({
+      name: "seo",
+      title: "SEO (Pflicht)",
+      type: "seoFields",
+      validation: (r) =>
+        r.required().custom((seo: { metaTitle?: string; metaDescription?: string } | undefined) => {
+          if (!seo?.metaTitle) return "Meta Title Pflicht für Stadtseiten.";
+          if (!seo?.metaDescription) return "Meta Description Pflicht.";
+          return true;
+        }),
+    }),
   ],
   preview: {
     select: { title: "city", subtitle: "slug.current" },

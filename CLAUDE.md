@@ -80,3 +80,49 @@ git config user.name "VibeGoette"
 4. Kombiseiten (Bochum zuerst)
 5. Referenzen migrieren
 6. Ratgeber für Longtails
+
+---
+
+## ⚠ Anti-Patterns aus Audit der alten Seite (NICHT wiederholen)
+
+Die alte WordPress-Seite hatte konkrete Schwächen — diese sind im neuen Stack durch Code/Schema-Constraints **systematisch verhindert**:
+
+### 1. Leere Objektseiten
+**Alt**: Viele Portfolio-Seiten zeigten nur Titel + Kommentarformular.
+**Neu**: `referencePage` Schema erzwingt: `image` (required), `description` (required), `addressPrimary` (required, alle Felder), min. 3 Stats (custom validation), Galerie-Warnung ab < 4 Bildern.
+**Gate**: `npm run audit:content:strict` failt den Build, wenn published Refs Bild/Beschreibung/Adresse fehlen.
+
+### 2. WordPress-Reste (Kommentare, Login-Hinweise)
+**Alt**: "Schreibe einen Kommentar", "Du musst angemeldet sein …" auf Objektseiten.
+**Neu**: Stack hat keine Kommentar-/Auth-Defaults. Nichts implementieren, was nicht aktiv von einer Section-Komponente angefordert wird.
+
+### 3. Doppelte Navigation
+**Alt**: Header/Menu mehrfach gerendert (Theme-Konflikt).
+**Neu**: Navigation ausschließlich in `app/(site)/layout.tsx`. Keine Page rendert eigene globale Nav.
+
+### 4. Inkonsistente Adressen
+**Alt**: "Südring 15 & Neustraße 15" vs. "& Neustraße 1" auf gleicher Seite. "Humboldstraße" statt "Humboldtstraße".
+**Neu**: Strukturierte Felder im Schema (`addressPrimary` + `addressAdditional`), PLZ-Regex-Validierung. Frontend rendert ausschließlich via `src/lib/address.ts` Helper (`formatAddressFull`, `formatAddressShort`, `formatStreetline`). **Niemals Adressen im JSX manuell zusammenbauen.**
+
+### 5. Schwache Portfolio-Übersicht
+**Alt**: Reine Textliste ohne Bilder/Kennzahlen.
+**Neu**: `/portfolio/` rendert grid mit Hero-Bild + Adresse + Quick-Stats (WE/GE/m²) per Default.
+
+### 6. Schwache Vertrauenssignale auf Startseite
+**Alt**: Generische Floskeln, keine harten Zahlen.
+**Neu**: `homePage.stats` (Pflicht-Felder Erfahrungsjahre, Experten, Anzahl Objekte) + `referenceShowcase` Section + Team-Sektion mit Reference auf `teamMember`.
+
+### 7. Leere SEO-Felder
+**Alt**: Default-WordPress-Titles, keine Meta-Descriptions.
+**Neu**: `seo` ist Pflicht auf `servicePage` und `locationPage` (custom validation für `metaTitle` + `metaDescription`). `seoFields` warnt bei Title > 60 / Description > 160 Zeichen.
+
+### 8. Cluster-Strategie nicht durchgezogen
+**Alt**: Keine systematische interne Verlinkung.
+**Neu**: `guidePage.relatedTransactional` Pflichtfeld. `servicePage.relatedLocations` und `locationPage.relatedServices` mit Min-Validierung.
+
+### Pre-Publish Checklist (für jede neue Page im Studio)
+- [ ] Hero ausgefüllt (eyebrow, headline, CTA)
+- [ ] SEO-Felder: metaTitle (< 60), metaDescription (< 160), focusKeyword
+- [ ] Bei Referenzen: Bild + min. 4 Galerie-Bilder + min. 3 Stats + Beschreibung
+- [ ] Cluster-Verlinkung: relatedServices/relatedLocations gesetzt
+- [ ] Ratgeber: relatedTransactional auf min. 1 Money-Page
