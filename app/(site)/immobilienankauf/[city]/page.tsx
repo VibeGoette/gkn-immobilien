@@ -6,10 +6,11 @@ const QUERY = `*[_type == "locationPage" && slug.current == $city][0]{
   "relatedServices": relatedServices[]->{ _id, _type, title, slug, serviceSlug }
 }`;
 
-export async function generateStaticParams() {
-  return sanityFetchList<{ city: string }>({
+export async function generateStaticParams(): Promise<{ city: string }[]> {
+  const items = await sanityFetchList<{ city: string }>({
     query: `*[_type == "locationPage" && defined(slug.current)]{ "city": slug.current }`,
   });
+  return items;
 }
 
 export default async function LocationPage({

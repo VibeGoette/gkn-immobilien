@@ -13,10 +13,11 @@ const QUERY = `*[_type == "referencePage" && slug.current == $slug][0]{
   "city": city->{ _id, city, slug }
 }`;
 
-export async function generateStaticParams() {
-  return sanityFetchList<{ slug: string }>({
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const items = await sanityFetchList<{ slug: string }>({
     query: `*[_type == "referencePage" && defined(slug.current)]{ "slug": slug.current }`,
   });
+  return items;
 }
 
 type ReferenceData = {

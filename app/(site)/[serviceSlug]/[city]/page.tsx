@@ -9,7 +9,7 @@ const QUERY = `*[_type == "serviceLocationPage"
     "location": location->{ _id, city, slug }
 }`;
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<{ serviceSlug: string; city: string }[]> {
   const items = await sanityFetchList<{
     serviceSlug: string;
     city?: string;

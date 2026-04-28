@@ -7,10 +7,6 @@ import { isSanityConfigured } from "../env";
  *
  * Defensive: bei nicht konfiguriertem Sanity (initial Build vor Marketplace-
  * Integration) wird kein Call gemacht — stattdessen { data: null }.
- * Das verhindert Build-Fehler und hält dynamic routes 404-fähig.
- *
- * Hinweis: defineLive aus next-sanity ist in v11 entfernt. Live-Updates für
- * Draft-Mode kommen in Etappe 2 wenn das Studio mit Inhalten gefüllt ist.
  */
 export async function sanityFetch<T = unknown>({
   query,
@@ -32,20 +28,25 @@ export async function sanityFetch<T = unknown>({
 }
 
 /**
- * sanityFetchList: typed helper für Listen-Queries (immer Array zurück).
- * Speziell für generateStaticParams() und Listen-Renderer.
+ * sanityFetchList: typed helper für Listen-Queries.
+ * GARANTIERT Array zurück — auch wenn Sanity null oder undefined returned.
+ *
+ * Wichtig: Return-Type ist explizit Promise<T[]> annotated, sonst inferiert
+ * TypeScript bei generateStaticParams() den Return als Promise<{}> wegen
+ * der ?? [] Fallback-Logik (verbindet T[] | never[]).
  */
-export async function sanityFetchList<T>({
-  query,
-  params = {},
-}: {
+export async function sanityFetchList<T>(args: {
   query: string;
   params?: Record<string, unknown>;
 }): Promise<T[]> {
   if (!isSanityConfigured) return [];
   try {
-    const data = await client.fetch<T[]>(query, params);
-    return data ?? [];
+    const data = await client.fetch<T[] | null | undefined>(
+      args.query,
+      args.params ?? {},
+    );
+    if (!Array.isArray(data)) return [];
+    return data;
   } catch (err) {
     console.warn("sanityFetchList fehlgeschlagen:", err);
     return [];

@@ -6,10 +6,11 @@ const QUERY = `*[_type == "blogPost" && slug.current == $slug][0]{
   "author": author->{ name, photo, role }
 }`;
 
-export async function generateStaticParams() {
-  return sanityFetchList<{ slug: string }>({
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const items = await sanityFetchList<{ slug: string }>({
     query: `*[_type == "blogPost" && defined(slug.current)]{ "slug": slug.current }`,
   });
+  return items;
 }
 
 export default async function BlogPostPage({
