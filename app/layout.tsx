@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/lib/live";
@@ -41,6 +41,15 @@ export const metadata: Metadata = {
     locale: "de_DE",
     siteName: "GKN Immobiliengruppe",
   },
+};
+
+// Explizites Viewport — verhindert dass iOS Safari bei initial render
+// rauszoomt wenn Content > viewport detected wird.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({

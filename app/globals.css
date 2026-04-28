@@ -369,3 +369,65 @@
     font-size: 22px;
   }
 }
+
+/* ============================================================ */
+/* Overflow-Protection                                          */
+/* Verhindert horizontales Scrollen + Pinch-Zoom-Out auf Mobile */
+/* ============================================================ */
+
+/* 1. Hard cap auf html + body — kein horizontaler Scroll möglich */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 2. Grid-Children dürfen nicht aus ihrem Container hinauswachsen
+ *    (Default: min-width: auto bei grid items → kann overflow erzeugen) */
+.hero .container > *,
+.about-grid > *,
+.region-grid-dark > *,
+.faq-grid > *,
+.team-grid > *,
+.adv-grid > *,
+.objekt-grid > *,
+.proc-grid > *,
+.bestand-grid > *,
+.footer-grid > * {
+  min-width: 0;
+}
+
+/* 3. Long unbreakable strings (Adressen, E-Mails, URLs, Telefonnummern)
+ *    dürfen umbrechen wenn nötig */
+.hero p.lead,
+.about-grid .body p,
+.faq-list .a,
+.mobile-drawer-contact a,
+.bestand-grid .row,
+.member .body p,
+footer p,
+footer ul li {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* 4. Hero-Card / Forms dürfen niemals breiter als ihr Container werden */
+.hero-card,
+.hero-card form,
+.hero-card input,
+.hero-card select,
+.hero-card .row-2 {
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* 5. SVG/Image responsive-safety net */
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 6. CTA-Strip h2: bei sehr kleinem Viewport kann der italic-text mit
+ *    max-width-clamp 760px vom Default zu eng werden */
+.cta-strip h2 {
+  max-width: 100%;
+}
