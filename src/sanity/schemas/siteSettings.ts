@@ -34,7 +34,26 @@ export const siteSettings = defineType({
       fields: [
         { name: "phone", title: "Telefon (Hauptnummer)", type: "string" },
         { name: "email", title: "E-Mail", type: "string" },
-        { name: "address", title: "Adresse", type: "text", rows: 3 },
+        { name: "address", title: "Adresse (Anzeigeformat)", type: "text", rows: 3 },
+      ],
+    }),
+    defineField({
+      name: "legal",
+      title: "Impressum / Rechtliches",
+      type: "object",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        { name: "companyName", title: "Firmenname (vollständig)", type: "string" },
+        { name: "street", title: "Straße + Hausnummer", type: "string" },
+        { name: "zipCode", title: "PLZ", type: "string" },
+        { name: "city", title: "Stadt", type: "string" },
+        { name: "vatId", title: "USt-IdNr.", type: "string" },
+        { name: "registerNumber", title: "Handelsregister-Nr.", type: "string" },
+        { name: "registerCourt", title: "Registergericht", type: "string" },
+        { name: "professionalTitle", title: "Berufsbezeichnung (gem. § 5 TMG)", type: "string" },
+        { name: "professionalChamber", title: "Zuständige Kammer", type: "string" },
+        { name: "professionalCountry", title: "Verleihungsstaat", type: "string", initialValue: "Deutschland" },
+        { name: "managingDirectors", title: "Geschäftsführer (für Impressum)", type: "string" },
       ],
     }),
     defineField({

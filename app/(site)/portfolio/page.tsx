@@ -39,7 +39,7 @@ export default async function PortfolioPage() {
           return (
             <li key={r._id}>
               <Link
-                href={`/referenzen/${r.slug?.current}/`}
+                href={`/referenzen/${r.slug?.current}`}
                 className="block rounded-lg border border-neutral-800 p-6 transition hover:border-neutral-500"
               >
                 <h2 className="text-xl">{formatStreetline(addr) || r.title}</h2>

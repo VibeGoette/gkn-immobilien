@@ -20,6 +20,7 @@ import { serviceLocationPage } from "./serviceLocationPage";
 import { homePage } from "./homePage";
 import { guidePage } from "./guidePage";
 import { blogPost } from "./blogPost";
+import { tool } from "./tool";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Objects
@@ -42,6 +43,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   referencePage,
   guidePage,
   blogPost,
+  tool,
   // Documents — Other
   teamMember,
 ];

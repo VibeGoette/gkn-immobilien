@@ -19,7 +19,7 @@ export default async function BlogIndex() {
       <ul className="mt-12 space-y-8">
         {posts.map((p: { _id: string; slug?: { current: string }; title: string; excerpt?: string }) => (
           <li key={p._id}>
-            <Link href={`/blog/${p.slug?.current}/`}>
+            <Link href={`/blog/${p.slug?.current}`}>
               <h2 className="text-2xl">{p.title}</h2>
               {p.excerpt && <p className="mt-2 text-neutral-400">{p.excerpt}</p>}
             </Link>

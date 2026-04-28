@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "audit:content": "tsx scripts/audit-content.ts",
     "audit:content:strict": "tsx scripts/audit-content.ts --fail",
+    "seed": "tsx scripts/seed.ts",
     "sanity:typegen": "sanity schema extract && sanity typegen generate"
   },
   "dependencies": {
@@ -17,6 +18,7 @@
     "@sanity/client": "^7.0.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^4.0.0",
+    "dotenv": "^16.4.0",
     "next": "^16.0.0",
     "next-sanity": "^11.0.0",
     "react": "^19.0.0",

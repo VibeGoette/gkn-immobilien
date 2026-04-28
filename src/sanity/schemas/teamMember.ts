@@ -23,6 +23,42 @@ export const teamMember = defineType({
       rows: 4,
     }),
     defineField({
+      name: "longBio",
+      title: "Ausführliche Bio (für E-E-A-T / About-Sektion)",
+      type: "array",
+      of: [{ type: "block" }],
+      description: "Karriere, Schwerpunkte, Persönliches — boostet Trust & SGE-Sichtbarkeit.",
+    }),
+    defineField({
+      name: "qualifications",
+      title: "Qualifikationen / Zertifikate",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "z.B. 'Geprüfter Fachwirt Immobilienwirtschaft (IHK)'",
+    }),
+    defineField({
+      name: "yearsExperience",
+      title: "Jahre Berufserfahrung",
+      type: "number",
+    }),
+    defineField({
+      name: "specialty",
+      title: "Spezialgebiet (für Ansprechpartner-Routing)",
+      type: "string",
+      options: {
+        list: [
+          { title: "Institutionelle Investitionen", value: "institutional" },
+          { title: "Private Verkäufe", value: "private" },
+          { title: "Operativ / Bauleitung / Verwaltung", value: "operations" },
+        ],
+      },
+    }),
+    defineField({
+      name: "linkedinUrl",
+      title: "LinkedIn URL",
+      type: "url",
+    }),
+    defineField({
       name: "photo",
       title: "Foto",
       type: "image",

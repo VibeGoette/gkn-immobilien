@@ -1,5 +1,14 @@
 # GKN Immobiliengruppe — Project Brief
 
+## Unternehmen (Single Source of Truth)
+- **Firma**: GKN Immobilien GmbH
+- **Sitz**: Humboldtstraße 34, 44787 Bochum (Vorsicht: zwei T in Humboldt**t**! Alte Seite hatte Tippfehler)
+- **Tel**: 0234 3671 506 220
+- **E-Mail**: info@gkn-immobilien.de
+- **USt-ID**: DE297068781
+- **Berufsbezeichnung**: Geprüfter Fachwirt Immobilienwirtschaft (IHK), IHK Mittleres Ruhrgebiet
+- **Geschäftsführung**: Ahmet Kurt (institutionell), Patrick Nierychlo (private), Moritz Glud (operativ)
+
 ## Stack
 - **Next.js 16** App Router, React 19, TypeScript strict
 - **Tailwind CSS v4** (PostCSS-Plugin)
@@ -41,8 +50,23 @@ src/sanity/
 ## Sanity-Datenmodell
 - **Singletons**: `siteSettings`, `homePage`
 - **Pages**: `servicePage`, `locationPage`, `serviceLocationPage`, `referencePage`, `guidePage`, `blogPost`
+- **Tools**: `tool` (Rechner: ertragswert, kostenvergleich, spekusteuer; Lead-Magneten: wertcheck, diskret, checkliste, marktbericht)
 - **Other**: `teamMember`
 - **Reusable Objects**: `seoFields`, `hero`, `faqSection`, `trustBar`, `processSection`, `richTextSection`, `ctaSection`, `referenceShowcase`
+
+## URL-Konvention (autoritativ aus GKN-Kontext-fuer-Claude.md)
+- **Nested, ohne trailing slash**: `/immobilienankauf/bochum`, `/mehrfamilienhaeuser-ankauf/bochum`
+- Sitemap, Frontend-Links, internal redirects: alle ohne `/` am Ende
+- Next.js default `trailingSlash: false` aktiv
+
+## Seed-Workflow
+Initial-Daten kommen via `npm run seed`:
+- `siteSettings` — komplettes Impressum (Firma, USt-ID, IHK-Bezeichnung, GFs)
+- 3 `teamMember` — Kurt, Nierychlo, Glud mit echten Kontaktdaten + Spezialisierung
+- 3 `locationPage` — Bochum, Dortmund, Essen mit Geo-Koordinaten + SEO
+- 12 `referencePage` Stubs — alle Bochum-Adressen aus dem Bestand. Hauptreferenz Südring 15 published, andere als DRAFTS bis Bilder + Beschreibung gepflegt sind.
+
+Idempotent: feste `_id` Werte → mehrfache Runs erzeugen Updates statt Duplikate.
 
 ## Deployment
 - **Hoster**: Vercel
@@ -67,10 +91,13 @@ git config user.name "VibeGoette"
 - [ ] Header + Footer Components aus Design ableiten
 - [ ] Section-Renderer-Komponenten bauen (für `pageBuilder` Output)
 - [ ] PortableText-Custom-Components für Body-Inhalte
+- [ ] Inhalte aus `gkn-content-vollstaendig.md` als servicePage/locationPage/serviceLocationPage seed-bar machen (zweiter Seed-Pass)
+- [ ] 7 Blog-Artikel als `blogPost` Documents seeden (`scripts/seed-blog.ts`)
 - [ ] FAQPage Schema.org JSON-LD pro Seite mit FAQ
 - [ ] Local SEO Schema (RealEstateAgent + LocalBusiness) für Stadtseiten
+- [ ] Tool-React-Components: Ertragswert-Rechner, Verkaufskosten-Vergleich, Speku-Check
+- [ ] Lead-Magnet-Formulare (Resend für E-Mails: Wertcheck, Diskrete Erstanfrage)
 - [ ] Sanity-Projekt via Vercel Marketplace verbinden
-- [ ] Inhalte ins Studio einpflegen (URL-Map/Keyword-Cluster aus Briefing)
 - [ ] DNS-Cutover gkn-immobilien.de → Vercel
 
 ## Rollout-Reihenfolge (laut Briefing)

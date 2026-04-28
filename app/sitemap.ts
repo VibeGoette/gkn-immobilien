@@ -29,20 +29,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: `${BASE}/`, lastModified: now, priority: 1 },
-    { url: `${BASE}/portfolio/`, lastModified: now, priority: 0.8 },
-    { url: `${BASE}/kontakt/`, lastModified: now, priority: 0.8 },
-    { url: `${BASE}/blog/`, lastModified: now, priority: 0.6 },
-    ...services.map((s) => ({ url: `${BASE}/${s.slug.current}/`, lastModified: now, priority: 0.9 })),
-    ...locations.map((l) => ({ url: `${BASE}/immobilienankauf/${l.slug.current}/`, lastModified: now, priority: 0.9 })),
+    { url: `${BASE}/portfolio`, lastModified: now, priority: 0.8 },
+    { url: `${BASE}/kontakt`, lastModified: now, priority: 0.8 },
+    { url: `${BASE}/blog`, lastModified: now, priority: 0.6 },
+    ...services.map((s) => ({ url: `${BASE}/${s.slug.current}`, lastModified: now, priority: 0.9 })),
+    ...locations.map((l) => ({ url: `${BASE}/immobilienankauf/${l.slug.current}`, lastModified: now, priority: 0.9 })),
     ...combos
       .filter((c) => c.location?.slug?.current)
       .map((c) => ({
-        url: `${BASE}/${c.serviceSlug.current}/${c.location.slug.current}/`,
+        url: `${BASE}/${c.serviceSlug.current}/${c.location.slug.current}`,
         lastModified: now,
         priority: 0.85,
       })),
-    ...refs.map((r) => ({ url: `${BASE}/referenzen/${r.slug.current}/`, lastModified: now, priority: 0.6 })),
-    ...guides.map((g) => ({ url: `${BASE}/ratgeber/${g.slug.current}/`, lastModified: now, priority: 0.6 })),
-    ...posts.map((p) => ({ url: `${BASE}/blog/${p.slug.current}/`, lastModified: now, priority: 0.5 })),
+    ...refs.map((r) => ({ url: `${BASE}/referenzen/${r.slug.current}`, lastModified: now, priority: 0.6 })),
+    ...guides.map((g) => ({ url: `${BASE}/ratgeber/${g.slug.current}`, lastModified: now, priority: 0.6 })),
+    ...posts.map((p) => ({ url: `${BASE}/blog/${p.slug.current}`, lastModified: now, priority: 0.5 })),
   ];
 }

@@ -42,6 +42,9 @@ export const structure: StructureResolver = (S) =>
       S.listItem()
         .title("Blog / News")
         .child(S.documentTypeList("blogPost").title("Blog")),
+      S.listItem()
+        .title("Tools / Rechner / Lead-Magneten")
+        .child(S.documentTypeList("tool").title("Tools")),
     ]);
 
 export { SINGLETON_TYPES };
