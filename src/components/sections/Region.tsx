@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { RegionMap } from "./RegionMap";
 
 type City = {
   nn: string;
@@ -15,11 +15,16 @@ const cities: City[] = [
   { nn: "iv.", href: "/immobilienankauf", name: "Metropolregion Ruhr", meta: "auf Anfrage" },
 ];
 
+/**
+ * Region-Section: dunkelblauer Editorial-Block mit custom SVG-Karte rechts
+ * und nummerierter City-Liste links. Nutzt die neue .region-dark Variante
+ * (in globals.css definiert) statt der hellen Default-Section.
+ */
 export function Region() {
   return (
-    <section className="region" id="region">
+    <section className="region region-dark" id="region">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head section-head-dark">
           <div className="eyebrow">
             <span className="num">05</span>Region
           </div>
@@ -32,49 +37,21 @@ export function Region() {
             </p>
           </div>
         </div>
-        <div className="region-grid">
-          <div className="cities">
+
+        <div className="region-grid region-grid-dark">
+          <div className="cities cities-dark">
             {cities.map((c) => (
-              <Link href={c.href} className="city" key={c.href}>
+              <Link href={c.href} className="city city-dark" key={c.href}>
                 <span className="nn">{c.nn}</span>
-                <span>
-                  <span className="name">{c.name}</span>
-                </span>
+                <span className="name">{c.name}</span>
                 <span className="meta">{c.meta}</span>
                 <span className="arrow-link">→</span>
               </Link>
             ))}
           </div>
 
-          <div className="region-map">
-            <Image
-              className="region-photo"
-              src="/images/bochum-region.jpg"
-              alt="Bochum Innenstadt — Bermuda3eck / Kortumstraße"
-              width={1200}
-              height={800}
-            />
-            <div className="region-overlay">
-              <div className="region-corner-tl">
-                <div className="region-title">Metropolregion Ruhr</div>
-                <div className="region-sub">Ankaufsgebiet · GKN</div>
-              </div>
-              <div className="region-corner-br">
-                <div className="region-pin">
-                  <span className="pin-dot"></span>
-                  <div className="pin-text">
-                    <strong>Bochum</strong>
-                    <em>Sitz · Hauptmarkt</em>
-                  </div>
-                </div>
-              </div>
-              <div className="region-bottom">
-                <span>51° 28′ N · 7° 13′ E</span>
-                <span>
-                  Bochum · Dortmund · Essen · Herne · Gelsenkirchen
-                </span>
-              </div>
-            </div>
+          <div className="region-map-box">
+            <RegionMap />
           </div>
         </div>
       </div>
