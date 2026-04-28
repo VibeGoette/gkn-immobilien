@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Design tokens — wird beim Übernehmen des Claude-Designs erweitert */
+@theme {
+  --color-brand-bg: #0a0a0a;
+  --color-brand-fg: #fafafa;
+  --color-brand-accent: #c9a961;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: ui-serif, Georgia, serif;
+}
+
+html, body {
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-fg);
+  font-family: var(--font-sans);
+}
