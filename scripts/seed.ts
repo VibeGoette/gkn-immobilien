@@ -6,8 +6,11 @@
  * Updates statt Duplikate erzeugen.
  *
  * Setup:
- *   1. NEXT_PUBLIC_SANITY_PROJECT_ID + NEXT_PUBLIC_SANITY_DATASET in .env.local
- *   2. SANITY_WRITE_TOKEN in .env.local (Sanity → API → Tokens → "Editor"-Token)
+ *   1. `vercel env pull .env.local` zieht alle Vars aus der
+ *      Vercel-Sanity-Marketplace-Integration.
+ *   2. Erforderliche Vars: NEXT_PUBLIC_SANITY_PROJECT_ID,
+ *      NEXT_PUBLIC_SANITY_DATASET, SANITY_API_WRITE_TOKEN
+ *      (Fallback: SANITY_WRITE_TOKEN für Bestandssetups).
  *
  * Run:
  *   npx tsx scripts/seed.ts
@@ -16,18 +19,23 @@
 import "dotenv/config";
 import { createClient } from "@sanity/client";
 
+const writeToken =
+  process.env.SANITY_API_WRITE_TOKEN ?? process.env.SANITY_WRITE_TOKEN;
+
+if (!writeToken) {
+  console.error(
+    "❌ SANITY_API_WRITE_TOKEN (oder SANITY_WRITE_TOKEN) fehlt in .env.local",
+  );
+  process.exit(1);
+}
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   apiVersion: "2026-04-28",
-  token: process.env.SANITY_WRITE_TOKEN!,
+  token: writeToken,
   useCdn: false,
 });
-
-if (!process.env.SANITY_WRITE_TOKEN) {
-  console.error("❌ SANITY_WRITE_TOKEN fehlt in .env.local");
-  process.exit(1);
-}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SITE SETTINGS — Singleton mit ECHTEN Impressums-Daten

@@ -6,13 +6,17 @@ anpassen. Werden manuell ausgeführt, sind idempotent und unterstützen einen
 
 ## Voraussetzungen
 
-In `.env.local`:
+`.env.local` aus Vercel ziehen (alle Sanity-Vars werden von der
+Vercel-Sanity-Marketplace-Integration gesetzt):
 
 ```
-NEXT_PUBLIC_SANITY_PROJECT_ID=<aus Vercel-Marketplace>
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_WRITE_TOKEN=<Editor-Token aus Sanity → API → Tokens>
+vercel env pull .env.local
 ```
+
+Erwartete Vars: `NEXT_PUBLIC_SANITY_PROJECT_ID`,
+`NEXT_PUBLIC_SANITY_DATASET`, `SANITY_API_WRITE_TOKEN`. Skripte
+erkennen zusätzlich `SANITY_WRITE_TOKEN` als Fallback für
+Bestandssetups.
 
 ## Vor jedem Live-Lauf
 

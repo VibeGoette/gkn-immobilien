@@ -7,9 +7,11 @@
  *
  * Idempotent: zweimaliges Ausführen findet beim zweiten Lauf 0 Dokumente.
  *
- * Setup:
- *   - NEXT_PUBLIC_SANITY_PROJECT_ID + NEXT_PUBLIC_SANITY_DATASET in .env.local
- *   - SANITY_WRITE_TOKEN (Editor-Token) in .env.local
+ * Setup (lokal):
+ *   `vercel env pull .env.local` aus dem mit der Vercel-Sanity-Integration
+ *   verbundenen Projekt. Erforderliche Vars: NEXT_PUBLIC_SANITY_PROJECT_ID,
+ *   NEXT_PUBLIC_SANITY_DATASET, SANITY_API_WRITE_TOKEN
+ *   (Fallback SANITY_WRITE_TOKEN wird ebenfalls erkannt).
  *
  * Run (Trockenlauf):
  *   npx tsx migrations/2026-rename-referencePage-to-referenceObject.ts --dry-run
@@ -34,17 +36,22 @@ const TO_TYPE = "referenceObject";
 
 const dryRun = process.argv.includes("--dry-run");
 
+const writeToken =
+  process.env.SANITY_API_WRITE_TOKEN ?? process.env.SANITY_WRITE_TOKEN;
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   apiVersion: "2026-04-28",
-  token: process.env.SANITY_WRITE_TOKEN!,
+  token: writeToken,
   useCdn: false,
 });
 
 async function main() {
-  if (!process.env.SANITY_WRITE_TOKEN) {
-    console.error("❌ SANITY_WRITE_TOKEN fehlt in .env.local");
+  if (!writeToken) {
+    console.error(
+      "❌ SANITY_API_WRITE_TOKEN (oder SANITY_WRITE_TOKEN) fehlt in .env.local",
+    );
     process.exit(1);
   }
 

@@ -27,11 +27,14 @@ const TO_TYPE = "seoMeta";
 
 const dryRun = process.argv.includes("--dry-run");
 
+const writeToken =
+  process.env.SANITY_API_WRITE_TOKEN ?? process.env.SANITY_WRITE_TOKEN;
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production",
   apiVersion: "2026-04-28",
-  token: process.env.SANITY_WRITE_TOKEN!,
+  token: writeToken,
   useCdn: false,
 });
 
@@ -42,8 +45,10 @@ type Hit = {
 };
 
 async function main() {
-  if (!process.env.SANITY_WRITE_TOKEN) {
-    console.error("❌ SANITY_WRITE_TOKEN fehlt in .env.local");
+  if (!writeToken) {
+    console.error(
+      "❌ SANITY_API_WRITE_TOKEN (oder SANITY_WRITE_TOKEN) fehlt in .env.local",
+    );
     process.exit(1);
   }
 

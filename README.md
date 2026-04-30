@@ -8,12 +8,19 @@ Stack: Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · Sanity v4 (emb
 
 ```bash
 npm install
-cp .env.example .env.local   # Werte ausfüllen oder via Vercel Marketplace ziehen
+
+# Sanity-Env-Vars aus Vercel-Marketplace-Integration ziehen
+# (alternativ: .env.example → .env.local manuell befüllen)
+vercel link
+vercel env pull .env.local
+
 npm run dev
 ```
 
 - Frontend: http://localhost:3000
 - Sanity Studio: http://localhost:3000/studio
+
+Erwartete Vars siehe [`.env.example`](./.env.example).
 
 ## Architektur
 
