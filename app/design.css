@@ -225,7 +225,7 @@ nav.primary a.active::after {
 }
 .hero h1 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(44px, 6.2vw, 84px);
   line-height: 1.02;
   letter-spacing: -0.015em;
@@ -235,7 +235,7 @@ nav.primary a.active::after {
 .hero h1 em {
   font-style: italic;
   color: var(--blue);
-  font-weight: 400;
+  font-weight: 600;
 }
 .hero p.lead {
   font-size: 18px;
@@ -305,7 +305,7 @@ nav.primary a.active::after {
 .hero-card h3 {
   font-family: var(--serif);
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 6px;
   letter-spacing: -0.005em;
 }
@@ -384,7 +384,7 @@ section { padding: 96px 0; }
 }
 .section-head h2 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(34px, 4.4vw, 56px);
   line-height: 1.05;
   letter-spacing: -0.01em;
@@ -485,7 +485,7 @@ section { padding: 96px 0; }
 }
 .adv-card h3 {
   font-family: var(--serif);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 22px;
   margin: 0 0 10px;
   color: #fff;
@@ -519,7 +519,7 @@ section { padding: 96px 0; }
 .ankauf-intro .left h3 {
   font-family: var(--serif);
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 600;
   margin: 0 0 16px;
   line-height: 1.2;
   color: var(--ink);
@@ -587,7 +587,7 @@ section { padding: 96px 0; }
 .objekt-card h3 {
   font-family: var(--serif);
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 4px;
   letter-spacing: -0.005em;
   color: var(--ink);
@@ -652,7 +652,7 @@ section { padding: 96px 0; }
 .proc-step h4 {
   font-family: var(--serif);
   font-size: 19px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 8px;
   color: var(--ink);
 }
@@ -892,7 +892,7 @@ section { padding: 96px 0; }
 .member h3 {
   font-family: var(--serif);
   font-size: 26px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 4px;
   letter-spacing: -0.005em;
   color: var(--ink);
@@ -987,7 +987,7 @@ section { padding: 96px 0; }
 .feature-obj h3 {
   font-family: var(--serif);
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 24px;
   line-height: 1.2;
   color: var(--ink);
@@ -1019,7 +1019,7 @@ section { padding: 96px 0; }
 .bestand-list h4 {
   font-family: var(--serif);
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 600;
   margin: 0 0 24px;
   color: var(--ink);
 }
@@ -1113,7 +1113,7 @@ section { padding: 96px 0; }
 }
 .cta-strip h2 {
   font-family: var(--serif);
-  font-weight: 400;
+  font-weight: 600;
   font-size: clamp(34px, 4vw, 52px);
   line-height: 1.1;
   margin: 0;
