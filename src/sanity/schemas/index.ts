@@ -11,6 +11,10 @@ import {
   ctaSection,
   referenceShowcase,
 } from "./sections";
+import { ctaBlock } from "./ctaBlock";
+import { uspItem } from "./uspItem";
+import { cityStats } from "./cityStats";
+import { portableTextStandard } from "./portableTextStandard";
 import { siteSettings } from "./siteSettings";
 import { teamMember } from "./teamMember";
 import { referencePage } from "./referencePage";
@@ -33,6 +37,10 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   richTextSection,
   ctaSection,
   referenceShowcase,
+  ctaBlock,
+  uspItem,
+  cityStats,
+  portableTextStandard,
   // Documents — Singletons
   siteSettings,
   homePage,
