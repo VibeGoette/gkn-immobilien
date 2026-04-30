@@ -1,15 +1,21 @@
 import { defineType, defineField } from "sanity";
 
 /**
+ * Bestandsobjekt im GKN-Portfolio (Referenz-Detailseite).
+ *
+ * Naming-Hinweis: `referenceObject` ist semantisch ('Bestandsobjekt'),
+ * nicht im Sanity-Sinn — dies ist trotz des Namens ein DOCUMENT-Type,
+ * kein Object-Type. URL ist /referenzen/<slug>.
+ *
  * STRIKTE VALIDIERUNG — verhindert die Hauptfehler der alten Seite:
  * - Leere Objektseiten (Titel ohne Bild/Beschreibung)
  * - Inkonsistente Adressformate ("Südring 15 & Neustraße 15" vs "& Neustraße 1")
  * - Schreibfehler in Adressen ("Humboldstraße" statt "Humboldtstraße")
- * Lösung: strukturierte Adressfelder + Pflicht für Bild, Beschreibung, mind. 1 Stat.
+ * Lösung: strukturierte Adressfelder + Pflicht für Bild, Beschreibung, mind. 3 Stats.
  */
-export const referencePage = defineType({
-  name: "referencePage",
-  title: "Referenz / Portfolio-Objekt",
+export const referenceObject = defineType({
+  name: "referenceObject",
+  title: "Bestandsobjekt (Referenz)",
   type: "document",
   groups: [
     { name: "content", title: "Inhalt", default: true },
@@ -196,7 +202,7 @@ export const referencePage = defineType({
       group: "content",
       initialValue: 0,
     }),
-    defineField({ name: "seo", title: "SEO", type: "seoFields", group: "seo" }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta", group: "seo" }),
   ],
   preview: {
     select: {

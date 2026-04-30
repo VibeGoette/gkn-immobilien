@@ -57,7 +57,7 @@ export const guidePage = defineType({
       of: [{ type: "reference", to: [{ type: "servicePage" }, { type: "locationPage" }, { type: "serviceLocationPage" }] }],
       validation: (r) => r.min(1).warning("Mindestens 1 transaktionale Seite verlinken (Cluster-Strategie)"),
     }),
-    defineField({ name: "seo", title: "SEO", type: "seoFields" }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta" }),
   ],
   preview: {
     select: { title: "title", subtitle: "slug.current", media: "image" },

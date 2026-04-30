@@ -32,7 +32,7 @@ type Ref = {
   seo?: { metaTitle?: string; metaDescription?: string };
 };
 
-const QUERY = `*[_type == "referencePage" && !(_id in path("drafts.**"))]{
+const QUERY = `*[_type == "referenceObject" && !(_id in path("drafts.**"))]{
   _id, title, slug, image,
   "galleryCount": count(gallery),
   "hasDescription": defined(description) && length(description) > 0,

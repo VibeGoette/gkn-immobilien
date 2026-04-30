@@ -2,7 +2,7 @@ import Link from "next/link";
 import { sanityFetchList } from "@/sanity/lib/live";
 import { formatAddressShort, formatStreetline, type ReferenceAddress } from "@/lib/address";
 
-const QUERY = `*[_type == "referencePage"] | order(order asc, acquisitionDate desc){
+const QUERY = `*[_type == "referenceObject"] | order(order asc, acquisitionDate desc){
   _id, title, slug, propertyType, image,
   "primary": addressPrimary,
   "additional": addressAdditional,

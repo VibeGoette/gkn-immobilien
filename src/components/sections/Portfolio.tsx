@@ -7,7 +7,7 @@ import Image from "next/image";
  * - "Old Watsche" → "Old Wattsche" (Wattenscheider Wurzel, 2× T)
  * - "Humboldstraße" → "Humboldtstraße" (Alexander von Humboldt, 2× T)
  *
- * Adressen sind hier statisch — wenn referencePage Documents im CMS gepflegt sind,
+ * Adressen sind hier statisch — wenn referenceObject Documents im CMS gepflegt sind,
  * wird diese Section per CMS-Query rendern (siehe TODO in CLAUDE.md).
  */
 

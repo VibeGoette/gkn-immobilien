@@ -37,7 +37,7 @@ export const serviceLocationPage = defineType({
     }),
     defineField({ name: "hero", title: "Hero", type: "hero" }),
     defineField(pageBuilder as never),
-    defineField({ name: "seo", title: "SEO", type: "seoFields" }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta" }),
   ],
   preview: {
     select: { title: "title", service: "serviceSlug.current", city: "location.slug.current" },

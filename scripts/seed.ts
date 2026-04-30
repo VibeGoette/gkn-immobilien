@@ -212,7 +212,7 @@ const buildReference = (s: RefStub) => {
   }, ${s.city}`;
   return {
     _id: id,
-    _type: "referencePage",
+    _type: "referenceObject",
     title,
     slug: { _type: "slug", current: s.slug },
     propertyType: s.type,

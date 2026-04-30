@@ -114,7 +114,7 @@ export const ctaSection = defineType({
   ],
 });
 
-// Reference-Showcase (verlinkt referencePages)
+// Reference-Showcase (verlinkt referenceObjects)
 export const referenceShowcase = defineType({
   name: "referenceShowcase",
   title: "Referenz-Showcase",
@@ -125,7 +125,7 @@ export const referenceShowcase = defineType({
       name: "references",
       title: "Referenzen",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "referencePage" }] }],
+      of: [{ type: "reference", to: [{ type: "referenceObject" }] }],
     }),
     defineField({
       name: "showAll",

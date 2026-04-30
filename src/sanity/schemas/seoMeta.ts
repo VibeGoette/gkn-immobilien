@@ -1,7 +1,7 @@
 import { defineType, defineField } from "sanity";
 
-export const seoFields = defineType({
-  name: "seoFields",
+export const seoMeta = defineType({
+  name: "seoMeta",
   title: "SEO",
   type: "object",
   options: { collapsible: true, collapsed: true },

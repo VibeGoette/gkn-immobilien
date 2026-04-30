@@ -31,6 +31,13 @@ export const blogPost = defineType({
       initialValue: () => new Date().toISOString(),
     }),
     defineField({
+      name: "updatedAt",
+      title: "Zuletzt aktualisiert",
+      type: "datetime",
+      description:
+        "Letztes inhaltliches Update — wird in Article-JSON-LD als dateModified verwendet.",
+    }),
+    defineField({
       name: "author",
       title: "Autor",
       type: "reference",
@@ -57,12 +64,33 @@ export const blogPost = defineType({
       },
     }),
     defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "string" }],
+      options: { layout: "tags" },
+      validation: (r) => r.max(10),
+    }),
+    defineField({
       name: "body",
       title: "Inhalt",
       type: "array",
       of: [{ type: "block" }, { type: "image", options: { hotspot: true } }],
     }),
-    defineField({ name: "seo", title: "SEO", type: "seoFields" }),
+    defineField({
+      name: "relatedPosts",
+      title: "Verwandte Beiträge",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "blogPost" }],
+          options: { filter: "_id != ^._id" },
+        },
+      ],
+      validation: (r) => r.max(3),
+    }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta" }),
   ],
   preview: {
     select: { title: "title", subtitle: "publishedAt", media: "image" },

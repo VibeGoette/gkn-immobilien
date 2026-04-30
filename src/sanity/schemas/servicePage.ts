@@ -48,7 +48,7 @@ export const servicePage = defineType({
     defineField({
       name: "seo",
       title: "SEO (Pflicht für Pillar-Seiten)",
-      type: "seoFields",
+      type: "seoMeta",
       validation: (r) =>
         r.required().custom((seo: { metaTitle?: string; metaDescription?: string } | undefined) => {
           if (!seo?.metaTitle) return "Meta Title ist Pflicht für Leistungsseiten.";

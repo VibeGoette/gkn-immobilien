@@ -35,7 +35,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       client.fetch(
         `*[_type == "serviceLocationPage" && defined(serviceSlug.current)]{ serviceSlug, "location": location->{ slug } }`,
       ),
-      client.fetch(`*[_type == "referencePage" && defined(slug.current)]{ slug }`),
+      client.fetch(`*[_type == "referenceObject" && defined(slug.current)]{ slug }`),
       client.fetch(`*[_type == "guidePage" && defined(slug.current)]{ slug }`),
       client.fetch(`*[_type == "blogPost" && defined(slug.current)]{ slug }`),
     ]);

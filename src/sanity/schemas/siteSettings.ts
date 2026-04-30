@@ -87,7 +87,7 @@ export const siteSettings = defineType({
     defineField({
       name: "defaultSeo",
       title: "Standard-SEO (Fallback für alle Pages)",
-      type: "seoFields",
+      type: "seoMeta",
     }),
   ],
   preview: {

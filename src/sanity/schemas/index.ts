@@ -1,6 +1,6 @@
 import type { SchemaTypeDefinition } from "sanity";
 
-import { seoFields } from "./seoFields";
+import { seoMeta } from "./seoMeta";
 import { hero } from "./hero";
 import {
   faqItem,
@@ -17,7 +17,7 @@ import { cityStats } from "./cityStats";
 import { portableTextStandard } from "./portableTextStandard";
 import { siteSettings } from "./siteSettings";
 import { teamMember } from "./teamMember";
-import { referencePage } from "./referencePage";
+import { referenceObject } from "./referenceObject";
 import { servicePage } from "./servicePage";
 import { locationPage } from "./locationPage";
 import { serviceLocationPage } from "./serviceLocationPage";
@@ -28,7 +28,7 @@ import { tool } from "./tool";
 
 export const schemaTypes: SchemaTypeDefinition[] = [
   // Objects
-  seoFields,
+  seoMeta,
   hero,
   faqItem,
   faqSection,
@@ -48,7 +48,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   servicePage,
   locationPage,
   serviceLocationPage,
-  referencePage,
+  referenceObject,
   guidePage,
   blogPost,
   tool,

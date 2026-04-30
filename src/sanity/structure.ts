@@ -31,7 +31,7 @@ export const structure: StructureResolver = (S) =>
       S.divider(),
       S.listItem()
         .title("Portfolio / Referenzen")
-        .child(S.documentTypeList("referencePage").title("Referenzen")),
+        .child(S.documentTypeList("referenceObject").title("Referenzen")),
       S.listItem()
         .title("Team")
         .child(S.documentTypeList("teamMember").title("Team-Mitglieder")),

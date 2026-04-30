@@ -164,7 +164,7 @@ export const tool = defineType({
       ],
       validation: (r) => r.min(1).warning("Min. 1 transaktionale Seite verlinken."),
     }),
-    defineField({ name: "seo", title: "SEO", type: "seoFields", group: "seo" }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta", group: "seo" }),
   ],
   preview: {
     select: { title: "title", subtitle: "toolType", media: "hero.image" },

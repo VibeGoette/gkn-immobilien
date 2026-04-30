@@ -38,7 +38,7 @@ export const homePage = defineType({
       ],
     }),
     defineField(pageBuilder as never),
-    defineField({ name: "seo", title: "SEO", type: "seoFields" }),
+    defineField({ name: "seo", title: "SEO", type: "seoMeta" }),
   ],
   preview: {
     prepare: () => ({ title: "Startseite" }),

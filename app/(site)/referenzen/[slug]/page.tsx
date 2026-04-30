@@ -6,7 +6,7 @@ import {
   type ReferenceAddress,
 } from "@/lib/address";
 
-const QUERY = `*[_type == "referencePage" && slug.current == $slug][0]{
+const QUERY = `*[_type == "referenceObject" && slug.current == $slug][0]{
   _id, title, propertyType, image, gallery, stats, description, highlights, measures, acquisitionDate, seo,
   "primary": addressPrimary,
   "additional": addressAdditional,
@@ -15,7 +15,7 @@ const QUERY = `*[_type == "referencePage" && slug.current == $slug][0]{
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const items = await sanityFetchList<{ slug: string }>({
-    query: `*[_type == "referencePage" && defined(slug.current)]{ "slug": slug.current }`,
+    query: `*[_type == "referenceObject" && defined(slug.current)]{ "slug": slug.current }`,
   });
   return items;
 }

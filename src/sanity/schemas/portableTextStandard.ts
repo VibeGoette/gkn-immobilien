@@ -74,7 +74,7 @@ export const portableTextStandard = defineType({
                   { type: "serviceLocationPage" },
                   { type: "guidePage" },
                   { type: "blogPost" },
-                  { type: "referencePage" },
+                  { type: "referenceObject" },
                 ],
               },
             ],
