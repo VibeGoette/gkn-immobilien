@@ -9,14 +9,20 @@ export function Hero() {
     <section className="hero">
       <div className="container">
         <div>
-          <div className="hero-eyebrow">
-            Immobilienankauf Ruhrgebiet · seit Bochum
-          </div>
-          <h1>
+          {/*
+           * SEO-H1: keyword-optimiert, visuell klein gehalten.
+           * Die emotionale Display-Headline darunter als <p class="hero-display">.
+           * Google gewichtet H1 als stärkstes On-Page-Signal —
+           * deshalb Haupt-Keyword hier, Tagline als visuelle Dominante separat.
+           */}
+          <h1 className="hero-kw">
+            Mehrfamilienhaus verkaufen Bochum&nbsp;·&nbsp;Direktankauf Ruhrgebiet
+          </h1>
+          <p className="hero-display">
             Verkaufen, ohne den
             <br />
             Markt zu&nbsp;<em>betreten.</em>
-          </h1>
+          </p>
           <p className="lead">
             Die GKN Immobiliengruppe kauft Mehrfamilienhäuser, Gewerbeimmobilien,
             Grundstücke und Portfolios im Ruhrgebiet direkt an. Keine
